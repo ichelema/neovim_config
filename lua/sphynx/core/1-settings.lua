@@ -251,6 +251,7 @@ vim.opt.wildignore = {
     "*\\.git\\*",
     "*/node_modules/**",
     "*/node_modules_custom/**",
+    "Neovim Doc/**",
     ".bundle",
     ".yardoc",
     ".prettierrc",

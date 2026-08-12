@@ -276,7 +276,7 @@ M.configs = {
                     "node_modules",
                     "node_modules_custom",
                     "[/\\]nvim%-data[/\\].-[/\\]doc[/\\]", -- doc/ sotto nvim-data (help dei plugin)
-                    "[/\\]Neovim Doc[/\\]", -- cartella di documentazione/appunti personali
+                    "Neovim Doc[/\\]", -- cartella di documentazione/appunti personali
                 },
                 scroll_strategy = "cycle",
                 selection_strategy = "reset",

@@ -1,8 +1,0 @@
--qwr2%e1C2%Ps0%s%u%I0c5T3R2H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "" -%l "it, en, *" https://neovim.io/doc/user/index.html -O1 "C:\Users\en27553\Desktop\Neovim Doc" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
-File generated automatically on Mon, 17 Feb 2025 02:21:38, do NOT edit
-
-To update a mirror, just launch httrack without any parameters
-The existing cache will be used (and modified)
-To have other options, retype all parameters and launch HTTrack
-To continue an interrupted mirror, just launch httrack without any parameters
-

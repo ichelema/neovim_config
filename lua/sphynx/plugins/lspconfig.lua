@@ -405,7 +405,7 @@ M.configs = {
                             library = vim.api.nvim_get_runtime_file("", true),
                             -- Non scansionare .git (e .vscode) per evitare ri-scan a ogni
                             -- operazione git mentre nvim e' aperto
-                            ignoreDir = { ".vscode", ".git" },
+                            ignoreDir = { ".vscode", ".git", "Neovim Doc" },
                             -- adjust these two values if your performance is not optimal
                             maxPreload = 2000,
                             preloadFileSize = 1000,
