@@ -41,9 +41,9 @@ M.configs = {
                 -- filter using buffer options
                 bo = {
                     -- if the file type is one of following, the window will be ignored
-                    filetype = { "neo-tree", "neo-tree-popup", "notify" },
+                    filetype = { "NvimTree", "neo-tree", "neo-tree-popup", "notify", "snacks_notif" },
                     -- if the buffer type is one of following, the window will be ignored
-                    buftype = { "terminal", "quickfix" },
+                    buftype = { "terminal", "quickfix", "nofile" },
                 },
             },
             statusline_winbar_picker = {
