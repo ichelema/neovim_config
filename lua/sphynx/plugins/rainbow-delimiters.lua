@@ -24,7 +24,7 @@ local M = {}
 M.plugins = {
     ["rainbow-delimiters"] = {
         "HiPhish/rainbow-delimiters.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" }, -- allineato a indent-blankline (suo dependent): evita che ibl referenzi gruppi RainbowDelimiter* non ancora definiti
     },
 }
 

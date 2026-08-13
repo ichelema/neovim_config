@@ -727,10 +727,10 @@ M.configs = {
                             })
                         end,
                         -- chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-                        -- exclude = {
-                        --     filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-                        --     buftype = { "nofile", "terminal", "help" },
-                        -- },
+                        exclude = {
+                            filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+                            buftype = { "nofile", "terminal" },
+                        },
                     },
                 },
             },
@@ -770,6 +770,29 @@ M.configs = {
             max_height = 25,
             wrap = false, -- Whether to wrap lines in the preview window
             border = "single", -- Border style for the preview window
+            -- Workaround per bug upstream: se row/col non sono forniti, nvim-tree-preview.lua
+            -- chiama require('nvim-tree').config.view.side, ma le versioni recenti di
+            -- nvim-tree.lua non espongono più M.config (spostato in nvim-tree.config.g) ->
+            -- crash "attempt to index field 'config' (a nil value)". Fornendoli qui, il
+            -- plugin salta del tutto quel percorso rotto. "left" deve restare in sync con
+            -- view.side impostato sopra in nvim-tree.setup().
+            win_position = {
+                row = function(tree_win, size)
+                    local cursor_row = vim.api.nvim_win_get_cursor(tree_win)[1] - 1
+                    local topline = vim.fn.getwininfo(tree_win)[1].topline - 1
+                    local relative_cursor = cursor_row - topline
+                    local win_pos = vim.api.nvim_win_get_position(tree_win)
+                    local screen_row = win_pos[1] + relative_cursor
+                    local editor_height = vim.api.nvim_get_option_value("lines", {}) - 1
+                    if screen_row + size.height > editor_height then
+                        return relative_cursor - ((screen_row + size.height) - editor_height)
+                    end
+                    return relative_cursor
+                end,
+                col = function(tree_win, _)
+                    return vim.fn.winwidth(tree_win) + 1
+                end,
+            },
         })
     end,
 }

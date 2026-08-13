@@ -34,6 +34,7 @@ local modules = {
     "vim-mark",                 -- OK - Evidenzia parole/pattern con colori persistenti (stile evidenziatore)
     "foldsigns",                -- Ok - Gestisce la visualizzazione dei segni (signs) nelle sezioni di codice piegate
     "heirline",                 -- Ok - Statusline, Winbar
+    "incline",                  -- OK - Nome file per finestra (floating), sostituisce il winbar di heirline
     "indent-blankline",         -- OK - Migliora indentazione mostrando linee visive
     "devicons",                 -- OK - Aggiunge icone colorate per i file
     "smoothcursor",             -- OK - Animazione sulla barra sinistra quando mi sposto, miglioramento visivo

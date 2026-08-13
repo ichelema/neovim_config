@@ -705,7 +705,7 @@ M.configs = {
 
         heirline.setup({
             statusline = StatusLines,
-            winbar = WinBar,
+            -- winbar = WinBar, -- disabilitato: sostituito da incline.nvim (evita il nome file duplicato)
             opts = {
                 -- if the callback returns true, the winbar will be disabled for that window
                 -- the args parameter corresponds to the table argument passed to autocommand callbacks. :h nvim_lua_create_autocmd()
