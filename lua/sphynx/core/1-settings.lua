@@ -66,9 +66,6 @@ local is_windows = function()
     return ((vim.fn.has("win16") == 1) or (vim.fn.has("win32") == 1) or (vim.fn.has("win64") == 1))
 end
 
-vim.g.is_nvim = (vim.fn.has("nvim") == 1)
-vim.g.is_nvim_qt = (vim.fn.exists("*nvim_list_uis") == 1) and (vim.api.nvim_list_uis()[1]["chan"] == 1)
-vim.g.is_gui_running = (vim.fn.has("gui_running") == 1) or vim.g.is_nvim_qt
 --}}} Identify platformgui_runn
 
 --{{{ Set before all
