@@ -29,6 +29,26 @@ utils.define_augroups({
             },
         },
         {
+            event = { "VimEnter", "DirChanged" },
+            opts = {
+                pattern = "*",
+                callback = function()
+                    -- Windows: named pipe; Unix: socket in XDG_RUNTIME_DIR.
+                    -- pcall: al secondo nvim sulla stessa cartella il nome e'
+                    -- gia' preso e serverstart solleva un errore.
+                    local nome = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+                    local socket
+                    if vim.fn.has("win32") == 1 then
+                        socket = [[\\.\pipe\claude-debug-]] .. nome
+                    else
+                        socket = (vim.env.XDG_RUNTIME_DIR or "/tmp") .. "/claude-debug-" .. nome
+                    end
+                    pcall(vim.fn.serverstart, socket)
+                end,
+                desc = "Socket per-progetto per l'MCP neovim di Claude",
+            },
+        },
+        {
             event = "TextYankPost",
             opts = {
                 pattern = "*",
