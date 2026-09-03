@@ -80,12 +80,12 @@ M.configs = {
                 enable = true, -- enable fancy mode
                 head = { cursor = "", texthl = "SmoothCursor", linehl = nil },
                 body = {
-                    { cursor = "●", texthl = "SmoothCursorGray1" },
-                    { cursor = "●", texthl = "SmoothCursorGray2" },
-                    { cursor = "•", texthl = "SmoothCursorGray3" },
-                    { cursor = "•", texthl = "SmoothCursorGray4" },
-                    { cursor = ".", texthl = "SmoothCursorGray5" },
-                    { cursor = ".", texthl = "SmoothCursorGray6" },
+                    { cursor = "●", texthl = "SmoothCursorTrail1" },
+                    { cursor = "●", texthl = "SmoothCursorTrail2" },
+                    { cursor = "•", texthl = "SmoothCursorTrail3" },
+                    { cursor = "•", texthl = "SmoothCursorTrail4" },
+                    { cursor = ".", texthl = "SmoothCursorTrail5" },
+                    { cursor = ".", texthl = "SmoothCursorTrail6" },
                 },
                 tail = { cursor = nil, texthl = "SmoothCursor" },
             },

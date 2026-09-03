@@ -47,7 +47,7 @@ local function setup_incline()
             groups = {
                 InclineNormal = {
                     default = true,
-                    guibg = darken(colors.blue, 0.4),
+                    guibg = darken(vim.g.colors_name == "nordfox" and colors.blue or colors.grey13, 0.4),
                 },
                 InclineNormalNC = {
                     default = true,

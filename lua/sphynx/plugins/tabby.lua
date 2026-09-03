@@ -56,15 +56,15 @@ local function setup_tabby_theme()
     local colors = require("sphynx.colors").get_color()
 
     local theme = {
-        fill = { bg = colors.grey11 },
+        fill = { bg = colors.grey13 },
         TabLineLogo = { fg = colors.cyan, bg = colors.grey13 },
         TabLineaPadding = { bg = colors.grey13 },
         TabLineWinCur = { fg = colors.blue, bg = colors.bg1 },
         TabLineWinSepCur = { fg = colors.blue, bg = colors.bg1 },
-        TabLineWin = { fg = colors.grey1, bg = colors.grey11 },
-        TabLineWinSep = { fg = colors.grey10, bg = colors.grey11 },
+        TabLineWin = { fg = colors.grey4, bg = colors.grey13 },
+        TabLineWinSep = { fg = colors.grey10, bg = colors.grey13 },
         TabLineBufCurModified = { fg = colors.yellow, bg = colors.bg1 },
-        TabLineBufModified = { fg = colors.yellow, bg = colors.grey11 },
+        TabLineBufModified = { fg = colors.yellow, bg = colors.grey13 },
         head = "TabLine",
         current_tab = { fg = colors.bg, bg = colors.blue, style = "bold" },
         tab = { fg = colors.grey4, bg = colors.grey9 },
