@@ -36,6 +36,8 @@ Caratteristiche personalizzabili:
  - Inlay hints (attivabili/disattivabili)
 Da sapere:
  - Usa la nuova API nativa vim.lsp.config() invece di require('lspconfig').setup()
+ - I server NON partono da soli all'apertura di un file: avviali con :LspStart (<leader>lS);
+   da quel momento partono anche sugli altri file dello stesso filetype
  - Da Neovim 0.12 i comandi sono quelli nativi :lsp enable/disable/restart/stop
    (nvim-lspconfig non definisce piu' :LspStart/:LspStop/:LspRestart/:LspInfo):
    qui :LspStart/:LspStop/:LspRestart sono ridefiniti come alias dei nativi
@@ -479,9 +481,7 @@ M.configs = {
 
             -- Configura il server con la nuova API
             vim.lsp.config(server_name, config)
-
-            -- Abilita il server per i suoi filetypes
-            vim.lsp.enable(server_name)
+            -- niente vim.lsp.enable: i server partono solo con :LspStart
         end
 
         -- Su Neovim 0.12 nvim-lspconfig non definisce piu' i comandi :Lsp*
@@ -489,8 +489,20 @@ M.configs = {
         -- li ridefiniamo come alias dei sottocomandi nativi, cosi' restano
         -- validi sia digitati sia come trigger lazy (vedi lazy_load.lsp_cmds)
         vim.api.nvim_create_user_command("LspStart", function(info)
-            vim.cmd("lsp enable " .. info.args)
-        end, { nargs = "*", desc = "Avvia i server LSP (alias di :lsp enable)" })
+            if info.args ~= "" then
+                return vim.cmd("lsp enable " .. info.args)
+            end
+            -- senza argomenti solo i server di `servers`: `:lsp enable` da solo
+            -- abilita TUTTE le config di nvim-lspconfig per il filetype, anche non installate
+            local ft = vim.bo.filetype
+            local names = vim.tbl_filter(function(name)
+                return vim.list_contains(vim.lsp.config[name].filetypes or {}, ft)
+            end, vim.tbl_keys(servers))
+            if #names == 0 then
+                return vim.notify("Nessun server LSP per '" .. ft .. "'", vim.log.levels.WARN)
+            end
+            vim.lsp.enable(names)
+        end, { nargs = "*", desc = "Avvia i server LSP del filetype (alias di :lsp enable)" })
         vim.api.nvim_create_user_command("LspStop", function(info)
             vim.cmd("lsp stop " .. info.args)
         end, { nargs = "*", desc = "Ferma i server LSP (alias di :lsp stop)" })
