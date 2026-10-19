@@ -22,7 +22,7 @@ Notes:
    Neovim); con provider "none" non e' richiesta. Se :checkhealth claudecode la reclama,
    aggiungerla in dependencies
  - Windows/MSYS: HOME diverge tra Neovim (C:/Users/...) e il claude di MSYS
-   (E:/msys64/home/Sphynx). Il CLI usa CLAUDE_CONFIG_DIR = /e/msys64/home/Sphynx/.claude;
+   (D:/msys64/home/Sphynx). Il CLI usa CLAUDE_CONFIG_DIR = /d/msys64/home/Sphynx/.claude;
    in M.configs qui sotto forziamo la stessa CLAUDE_CONFIG_DIR per Neovim (solo se non gia'
    ereditata), cosi' lockfile e /ide puntano alla stessa cartella .claude/ide/
  - :checkhealth claudecode per verificare CLI, server, lockfile e stato della connessione
@@ -43,7 +43,7 @@ Keymaps:
  - :ClaudeCodeDiffAccept / :ClaudeCodeDiffDeny → Accetta/rifiuta una diff proposta
  - :ClaudeCodeCloseAllDiffs  → Chiude tutte le diff pendenti
 TODO:
- - [ ] Verificare con :checkhealth claudecode che il lockfile finisca in E:/msys64/home/Sphynx/.claude/ide/
+ - [ ] Verificare con :checkhealth claudecode che il lockfile finisca in D:/msys64/home/Sphynx/.claude/ide/
  - [ ] Valutare snacks.nvim + provider "snacks" se in futuro si vuole il terminale dentro Neovim
 ===============================================================================================
 --]]
@@ -68,13 +68,13 @@ M.configs = {
     ["claudecode"] = function()
         -- Neovim (app Windows) e il claude di MSYS devono condividere la stessa cartella
         -- .claude/ide per il lockfile del comando /ide. Il CLI usa gia'
-        -- CLAUDE_CONFIG_DIR = /e/msys64/home/Sphynx/.claude; se Neovim non eredita quella
+        -- CLAUDE_CONFIG_DIR = /d/msys64/home/Sphynx/.claude; se Neovim non eredita quella
         -- variabile (lancio fuori da MSYS) la impostiamo qui, cosi' il lockfile finisce
         -- dove il CLI lo cerca. Se invece nvim parte da MSYS la variabile c'e' gia' e non
         -- tocchiamo nulla.
         if not vim.env.CLAUDE_CONFIG_DIR or vim.env.CLAUDE_CONFIG_DIR == "" then
             if vim.fn.has("win32") == 1 then
-                vim.env.CLAUDE_CONFIG_DIR = "E:/msys64/home/Sphynx/.claude"
+                vim.env.CLAUDE_CONFIG_DIR = "D:/msys64/home/Sphynx/.claude"
             else
                 vim.env.CLAUDE_CONFIG_DIR = vim.fn.expand("~/.claude")
             end
