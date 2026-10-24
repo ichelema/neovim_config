@@ -70,7 +70,10 @@ mapping.opt_plugin_visual = {
 --{{{ Global
 if vim.fn.has("macunix") == 1 then
     vim.cmd([[let macvim_skip_cmd_opt_movement = 1]])
-    vim.opt.macmeta = true
+    -- macmeta esiste solo in MacVim: in Neovim l'opzione non c'e' e darebbe errore
+    if vim.fn.exists("+macmeta") == 1 then
+        vim.opt.macmeta = true
+    end
     mapping.register({
         {
             mode = { "n", "v" },
