@@ -44,6 +44,10 @@ utils.define_augroups({
                         socket = (vim.env.XDG_RUNTIME_DIR or "/tmp") .. "/claude-debug-" .. nome
                     end
                     pcall(vim.fn.serverstart, socket)
+                    -- socket fisso: Claude lo trova qualunque sia la cartella di Neovim
+                    local fisso = vim.fn.has("win32") == 1 and [[\\.\pipe\claude-nvim]]
+                        or (vim.env.XDG_RUNTIME_DIR or "/tmp") .. "/claude-nvim"
+                    pcall(vim.fn.serverstart, fisso)
                 end,
                 desc = "Socket per-progetto per l'MCP neovim di Claude",
             },
