@@ -173,6 +173,16 @@ end
 
 -- sync with system clipboard
 vim.opt.clipboard = "unnamedplus"
+if vim.env.SSH_TTY then
+    -- VPS senza clipboard: copia via OSC 52 verso WezTerm; incolla dal registro interno (WezTerm non legge OSC 52)
+    local osc52 = require("vim.ui.clipboard.osc52")
+    local function paste() return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") } end
+    vim.g.clipboard = {
+        name = "OSC 52",
+        copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+        paste = { ["+"] = paste, ["*"] = paste },
+    }
+end
 -- confirm to save changes before exiting modified buffer
 vim.opt.confirm = true
 vim.opt.grepprg = "rg --vimgrep"
